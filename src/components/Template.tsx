@@ -1,5 +1,14 @@
 import React from 'react'
 
-export default function Template(): JSX.Element {
-  return <></>
+interface Props {
+  children: JSX.Element
+}
+
+export default function Template({ children }: Props): JSX.Element {
+  return (
+    <div>
+      <p>Test text</p>
+      {children}
+    </div>
+  )
 }
