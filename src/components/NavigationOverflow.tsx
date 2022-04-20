@@ -10,7 +10,7 @@ interface Props {
 export default function NavigationOverflow({ active, onClick }: Props): JSX.Element {
   const variants: Variants = {
     hidden: {
-      display: 'hidden',
+      display: 'none',
       opacity: 0,
     },
     visible: {
