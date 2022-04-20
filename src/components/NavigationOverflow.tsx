@@ -12,6 +12,9 @@ export default function NavigationOverflow({ active, onClick }: Props): JSX.Elem
     hidden: {
       display: 'none',
       opacity: 0,
+      transition: {
+        display: { delay: 0.3 },
+      },
     },
     visible: {
       display: 'block',

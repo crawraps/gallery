@@ -1,12 +1,9 @@
 import React from 'react'
 import Header from './Header'
 import Navigation from './Navigation'
+import { Outlet } from 'react-router-dom'
 
-interface Props {
-  children: JSX.Element
-}
-
-export default function Layout({ children }: Props): JSX.Element {
+export default function Layout(): JSX.Element {
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false)
 
   return (
@@ -23,7 +20,7 @@ export default function Layout({ children }: Props): JSX.Element {
           if (isNavOpen) setIsNavOpen(!isNavOpen)
         }}
       />
-      {children}
+      <Outlet />
     </>
   )
 }
