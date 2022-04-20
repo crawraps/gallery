@@ -10,11 +10,11 @@ interface Props {
 export default function NavigationOverflow({ active, onClick }: Props): JSX.Element {
   const variants: Variants = {
     hidden: {
-      zIndex: -1,
+      display: 'hidden',
       opacity: 0,
     },
     visible: {
-      zIndex: 3,
+      display: 'block',
       opacity: 1,
     },
   }
@@ -37,4 +37,5 @@ const Container = styled(motion.div)`
   left: 0;
   height: 100vh;
   width: 100vw;
+  z-index: 3;
 `
