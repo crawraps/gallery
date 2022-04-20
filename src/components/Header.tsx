@@ -44,6 +44,7 @@ export default function Header(props: Props): JSX.Element {
 
 const StyledContainer = styled(motion(Container))`
   height: 60px;
+  top: 0;
   position: fixed;
   display: flex;
   align-items: center;
