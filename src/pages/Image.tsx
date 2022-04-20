@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import ImageCard from '../components/ImageCard'
 
 export default function Image(): JSX.Element {
   const params = useParams()
-  return <p>{`Image id is ${params.imageId}`}</p>
+  return <ImageCard img='123' />
 }
