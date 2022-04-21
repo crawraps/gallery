@@ -17,3 +17,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 )
+
+// If debug mode is true, images will be stored in local ctorage
+export const debugMode = false

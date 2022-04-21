@@ -1,15 +1,16 @@
+import { debugMode } from '../../index'
 import { UnsplashImage } from '../../types'
 import { FETCH_IMAGES } from './../imagesReducer'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { setImages } from '../imagesReducer'
 
-const fetchImages = () =>
+const fetchImages = async () =>
   fetch('https://api.unsplash.com/photos/random/?count=24&client_id=it8n1VGS6H8gj-O49QZ437AeL1TE-vdqkAT2_57KYQI')
 
 function* fetchImagesWorker(): Generator<any, any, any> {
   const localStorageData = localStorage.getItem('images')
 
-  if (localStorageData) {
+  if (localStorageData && debugMode) {
     // Get images from local storage if provided
     yield put(setImages(JSON.parse(localStorageData)))
   } else {

@@ -29,10 +29,10 @@ export default function Navigation({ active, toggleActive }: Props): JSX.Element
         transition={{ ease: 'easeOut', duration: 0.5 }}
       >
         <List variant='flush'>
-          <Item>
+          <Item onClick={toggleActive}>
             <StyledLink to='/'>Gallery</StyledLink>
           </Item>
-          <Item>
+          <Item onClick={toggleActive}>
             <StyledLink to='/about'>About me</StyledLink>
           </Item>
         </List>

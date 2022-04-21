@@ -2,14 +2,15 @@ import React from 'react'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import Card from 'react-bootstrap/Card'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-import { UnsplashImage } from '../types'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
 
-interface Props {
-  img: UnsplashImage
-}
+export default function ImageModal(): JSX.Element {
+  const params = useParams()
+  const images = useSelector((state: RootState) => state.images)
+  const img = images.find(image => (params.imageId ? image.id === +params.imageId : image.id === 0)) ?? images[0]
 
-export default function ImageCard({ img }: Props): JSX.Element {
   const [active, setActive] = React.useState(true)
   const navigate = useNavigate()
 
@@ -30,9 +31,7 @@ export default function ImageCard({ img }: Props): JSX.Element {
     },
   }
 
-  const exitClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    event.preventDefault()
-    event.stopPropagation()
+  const exitClickHandler = (event?: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     setActive(false)
     setTimeout(() => {
       navigate('/')
@@ -47,21 +46,21 @@ export default function ImageCard({ img }: Props): JSX.Element {
         exit='hidden'
         variants={overflowVariants}
         transition={{ ease: 'easeIn', duration: 0.2 }}
-        onClick={exitClickHandler}
       >
-        <AnimatedCard
+        <Overflow onClick={exitClickHandler} />
+        <StyledCard
           initial='hidden'
           animate={active ? 'visible' : 'hidden'}
           exit='hidden'
           variants={cardVariants}
           transition={{ ease: 'easeIn', duration: 0.2 }}
         >
-          <Card.Img variant='top' src={img.url} />
+          <Card.Img variant='top' alt='modal-image' src={img.url} height={window.innerHeight * 0.8} loading='lazy' />
           <Card.Body>
             <Card.Title>{img.author}</Card.Title>
-            <Card.Text>{img.description}</Card.Text>
+            {img.description ? <Card.Text>{img.description}</Card.Text> : null}
           </Card.Body>
-        </AnimatedCard>
+        </StyledCard>
       </Container>
     </AnimatePresence>
   )
@@ -70,7 +69,7 @@ export default function ImageCard({ img }: Props): JSX.Element {
 const Container = styled(motion.div)`
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 6;
@@ -80,4 +79,13 @@ const Container = styled(motion.div)`
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.2s ease-in;
 `
-const AnimatedCard = motion(Card)
+const StyledCard = styled(motion(Card))`
+  border: none;
+`
+const Overflow = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+`

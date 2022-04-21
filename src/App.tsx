@@ -4,6 +4,7 @@ import About from './pages/About'
 import Home from './pages/Home'
 import Image from './pages/Image'
 import Layout from './components/Layout'
+import ImageModal from './components/ImageModal'
 
 export default function App(): JSX.Element {
   const location = useLocation()
@@ -21,7 +22,7 @@ export default function App(): JSX.Element {
 
       {state?.backgroundLocation && (
         <Routes>
-          <Route path='images/:imageId' element={<Image />} />
+          <Route path='images/:imageId' element={<ImageModal />} />
         </Routes>
       )}
     </>
